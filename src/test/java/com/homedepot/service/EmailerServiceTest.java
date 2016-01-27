@@ -3,13 +3,15 @@ package com.homedepot.service;
 import com.homedepot.entity.EmailDetails;
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.mail.MailSender;
 import org.springframework.mail.SimpleMailMessage;
 
+import static org.hamcrest.CoreMatchers.containsString;
+import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
-import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
@@ -41,7 +43,12 @@ public class EmailerServiceTest{
 
     @Test
     public void itShouldUseTheSenderToSendAMessage() {
+        ArgumentCaptor<SimpleMailMessage> captor = ArgumentCaptor.forClass
+                (SimpleMailMessage.class);
+
         emailService.sendEmail(details);
-        verify(sender, times(1)).send(any(SimpleMailMessage.class));
+        verify(sender, times(1)).send(captor.capture());
+
+        assertThat(captor.getValue().getText(), containsString("vault.io"));
     }
 }
