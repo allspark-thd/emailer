@@ -25,6 +25,6 @@ public class EmailerController {
     @RequestMapping(value = "/send", method = RequestMethod.POST)
     public ResponseEntity<String> sendEmail(@RequestBody EmailDetails details) {
         emailService.sendEmail(details);
-        return new ResponseEntity("OK", HttpStatus.ACCEPTED);
+        return new ResponseEntity("OK", HttpStatus.OK);
     }
 }

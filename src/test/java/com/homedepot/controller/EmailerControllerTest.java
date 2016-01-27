@@ -45,10 +45,11 @@ public class EmailerControllerTest {
     }
 
     @Test
-    public void itShouldReturnACCEPTEDWhenItGetsAPayload() throws Exception {
+    public void itShouldReturnOKWhenItGetsAPayload() throws Exception {
 
         mockMvc.perform(MockMvcRequestBuilders.post("/send").contentType(MediaType.APPLICATION_JSON)
-                .content(json.toString())).andExpect(MockMvcResultMatchers.status().isAccepted());
+                .content(json.toString())).andExpect(MockMvcResultMatchers
+                .status().isOk());
     }
 
     @Test
