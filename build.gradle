@@ -32,7 +32,8 @@ dependencies {
 	compile('org.springframework.boot:spring-boot-starter-mail')
 	compile('org.springframework.boot:spring-boot-starter-web')
 	compile('javax.mail:mail:1.4.1')
-	testCompile('org.springframework.boot:spring-boot-starter-test') 
+	testCompile('org.springframework.boot:spring-boot-starter-test')
+    testCompile('org.json:json:20151123')
 }
 
 
