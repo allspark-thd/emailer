@@ -9,4 +9,5 @@ public class EmailerService {
     public boolean sendEmail(EmailDetails details) {
         return true;
     }
+
 }
