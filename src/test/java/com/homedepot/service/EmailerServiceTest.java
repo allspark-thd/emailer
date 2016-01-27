@@ -14,8 +14,7 @@ public class EmailerServiceTest{
     @Before
     public void setUp() {
         details = new EmailDetails();
-        details.setAccessRequirementsRepo("https://github.com/foo/repo/file" +
-                ".text");
+        details.setAccessRequirementsRepo("https://github.com/foo/repo/file");
         details.setAppId("the-id");
         details.setDesiredVaultUrl("https://vault.io/secret/key");
         details.setSpaceGuid("the-guid");
