@@ -1,4 +1,4 @@
-package com.thehomedepot;
+package com.homedepot;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
