@@ -8,10 +8,13 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.mail.MailSender;
 import org.springframework.mail.SimpleMailMessage;
+import org.springframework.test.util.ReflectionTestUtils;
 
-import static org.hamcrest.CoreMatchers.containsString;
+import static org.hamcrest.core.Is.is;
+import static org.hamcrest.core.IsEqual.equalTo;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
+import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
@@ -19,13 +22,15 @@ public class EmailerServiceTest{
 
     private EmailDetails details;
     private EmailerService emailService;
+    private String recipientEmail = "db@example.com";
 
+    private ArgumentCaptor<SimpleMailMessage> captor = ArgumentCaptor
+            .forClass(SimpleMailMessage.class);
     @Mock
     MailSender sender;
 
     @Before
     public void setUp() {
-
         MockitoAnnotations.initMocks(this);
 
         details = new EmailDetails();
@@ -35,6 +40,8 @@ public class EmailerServiceTest{
         details.setSpaceGuid("the-guid");
 
         emailService = new EmailerService(sender);
+        //TODO Gross.
+        ReflectionTestUtils.setField(emailService, "recipientEmail", recipientEmail);
     }
     @Test
     public void itShouldSendAnEmailWithValidDetails() {
@@ -43,12 +50,14 @@ public class EmailerServiceTest{
 
     @Test
     public void itShouldUseTheSenderToSendAMessage() {
-        ArgumentCaptor<SimpleMailMessage> captor = ArgumentCaptor.forClass
-                (SimpleMailMessage.class);
+        emailService.sendEmail(details);
+        verify(sender, times(1)).send(any(SimpleMailMessage.class));
+    }
 
+    @Test
+    public void itShouldSendTheEmailToTheRightPerson() {
         emailService.sendEmail(details);
         verify(sender, times(1)).send(captor.capture());
-
-        assertThat(captor.getValue().getText(), containsString("vault.io"));
+        assertThat(captor.getValue().getTo()[0], is(equalTo(recipientEmail)));
     }
 }

@@ -4,8 +4,10 @@ import com.homedepot.entity.EmailDetails;
 import org.springframework.mail.SimpleMailMessage;
 
 public class EmailGenerator {
-    public SimpleMailMessage generateEmail(EmailDetails details) {
+    public SimpleMailMessage generateEmail(EmailDetails details,
+                                           String recipentEmail) {
         SimpleMailMessage msg = new SimpleMailMessage();
+        msg.setTo(recipentEmail);
         msg.setSubject("New Request for access to a datasource");
 
         String body = String.format(
