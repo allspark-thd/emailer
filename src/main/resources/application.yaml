@@ -1,0 +1,13 @@
+---
+spring:
+  mail:
+    host: localhost
+    port: 25
+recipient: jkruck@pivotal.io
+
+spring:
+  profiles: cloud
+  mail:
+    host: ${vcap.services.smtp-server.credentials.hostname}
+    username: ${vcap.services.smtp-server.credentials.username}
+    password: ${vcap.services.smtp-server.credentials.password}

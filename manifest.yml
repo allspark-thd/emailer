@@ -1,0 +1,7 @@
+---
+applications:
+- name: emailer
+  memory: 512M
+  instances: 2
+  path: build/libs/emailer-0.0.1-SNAPSHOT.jar
+  services: [ smtp-service ]
