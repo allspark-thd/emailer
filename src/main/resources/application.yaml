@@ -1,5 +1,5 @@
 ---
-recipient: jkruck@pivotal.io
+recipient: nobody@example.com
 
 spring:
   mail:
