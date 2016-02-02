@@ -5,7 +5,7 @@ Email requests for services to interested parties.
 #Setup 
 
 ```
-cf cups smtp-server -p '{"hostname": "smtp.example.com", "username":"mail-user", "password": "mail-password"}'
+cf cups smtp-service -p '{"hostname": "smtp.example.com", "username":"mail-user", "password": "mail-password"}'
 cf push
 ```
 
