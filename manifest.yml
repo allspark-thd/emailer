@@ -1,6 +1,7 @@
 ---
 applications:
 - name: emailer
+  buildpack: https://github.com/cloudfoundry/java-buildpack.git
   memory: 512M
   instances: 2
   path: build/libs/emailer-0.0.1-SNAPSHOT.jar
